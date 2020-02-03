@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1580247421 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 3\lab #3\main.cpp
+	<iostream>
+	"recursion.h"
+
+1580247421 c:\users\sandi\desktop\classes\winter 2020\c++\wk 3\lab #3\recursion.h
+	<string>
+
+1580247542 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 3\lab #3\recursion.cpp
+	"recursion.h"
+	<iostream>
+

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1571778367 source:c:\users\sandi\desktop\classes\fall 2019\c++\lab 3 part1 sjasmer\main.cpp
+	<iostream>
+	<iomanip>
+	<cstdlib>
+

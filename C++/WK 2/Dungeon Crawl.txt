@@ -1,0 +1,340 @@
+/*
+Websites used for reference
+-http://www.cplusplus.com/forum/beginner/28714/
+https://codereview.stackexchange.com/questions/203325/dungeon-crawl-game-for-the-terminal
+
+*/
+#include <iostream>
+#include <cstdlib> // for random #include <ctime>
+#include <limits>
+
+using namespace std;
+
+
+// global constants
+const int MAX_ROW=10;
+const int MAX_COL=12;
+const char SPACE = '.';
+const char TRAP = '#';
+const char PLAY = '@';
+const char CASH = '$';
+const char UP = 'U';
+const char DOWN = 'D';
+const char LEFT = 'L';
+const char RIGHT = 'R';
+const long BIGNUM = 2000;
+
+
+// function declarations
+
+// displays the instructions
+void displayInstructions();
+// sets up a dungeon with traps and treasure
+void initDungeon(char dungonArray[][]);
+// display the current dungeon state
+void displayDungeon(char dungonArray[][]);
+// gets a valid move (L,R,U,D)
+char getMove(char dungonArray[][]);
+// sees if move is onto checkCode object
+bool checkMove(char dungonArray[][]);
+// update the dungeon for next move
+void updateDungeon(char dungonArray[][], move);
+// do you want to play again?
+bool repeat();
+
+
+int main()
+{
+    bool win, lose;
+    char dungeonArray [MAX_ROW][MAX_COL];
+    int numTraps = 6; // using fixed number to start with
+    srand(static_cast<int>(time(NULL))); // initialize random
+
+
+
+//Main loop for play again
+do {
+    displayInstructions();
+    initDungeon(dungeonArray[][]);
+
+// game loop
+    do {
+        displayDungeon(dungeonArray[][]);
+        char playerMove = getMove(dungeonArray[][]);
+
+        playerMove=
+
+        // move monsters if you have any // no monsters in this first version
+        // check for win or lose // win if steps on treasure win = checkMove();
+        win = checkMove(dungeonArray[][]);
+
+        // if did not win, see if died from a trap or monster lose = (!win and checkMove(/* trap */)) and checkMove(/* Monster */);
+        lose = (!win and checkMove(/* trap */)) and checkMove(/* Monster */);
+
+        // now that we know it was safe move, update the world // for the next turn if (not win and not lose)
+        updateDungeon();
+
+} while (win!=true && lose!=true);
+
+} while (repeat());
+
+return 0;
+}
+
+
+// function definitions
+
+// static bool instructions.
+void displayInstructions()
+{
+   static bool first = true;
+    if(first)
+        {
+            cout<< "Welcome to Dungeon Crawl!"<<
+            "The goal is to get to the exit of the dungeon without hitting any of the traps. "<<
+            "Best of luck to you!"<< endl;
+        }
+    else
+        cout << "You know how to play Dungeon Crawl, get crawling."<< endl;
+    first=false;
+
+}
+
+// sets up a dungeon with traps and treasure
+void initDungeon(char dungeonArray[][], PLAY, TRAP, CASH)
+{
+/*
+1) createDungeon – initializes a new dungeon
+a) pass in the dungeon and a number for how many traps to place
+b) randomly place that many traps in the dungeon
+c) randomly places treasure and player
+d) make sure that each item
+You create the dungeon in main, so you can pass it around as need be.
+The initialization code sets all locations to a blank space, then randomly sets as many traps as you want, then randomly locates one treasure and finally randomly places the player.
+If you have monsters, you set them up also. You can make sure that each new item is on its own space or you can allow later placed items to overwrite earlier placed ones. Your choice of how you want to proceed.
+*/
+    //sets board
+    for(int i = 0; i<MAX_ROW; i++)
+        for (int j=0; j<MAX_COL; j++)
+        {
+            dungeonArray[MAX_ROW][MAX_COL]= SPACE;
+        }
+
+    //sets random traps
+    for(int i = 0; i < MAX_ROW; i++)
+    {
+        int row = rand()% (MAX_ROW);
+        int col = rand()% (MAX_COL);
+            if (dungeonArray[row][col]= SPACE;)
+                dungeonArray[row][col]= TRAP;
+            else
+                i--;
+    }
+    //sets random cash
+    {
+        int row = rand()% (MAX_ROW);
+        int col = rand()% (MAX_COL);
+            if (dungeonArray[row][col]= GOLD;)
+    }
+
+    //sets player on empty spot
+    do{
+        int row = rand()% (MAX_ROW);
+        int col = rand()% (MAX_COL);
+        if (dungeonArray[row][col]== SPACE)
+        {
+            dungeonArray[row][col]=PLAYER;
+        }
+
+    }while (dungeonArray[row][col] != PLAYER);
+
+}
+
+// display the current dungeon state
+void displayDungeon(char dungeonArray[][])
+{
+    /*
+a) pass in the dungeon
+b) display the dungeon
+c) return type should be void
+Displaying the board should be simpler than in TTT, since you just output the dungeon array.
+*/
+    cout << "Here is what the dungeon currently looks like" << endl;
+
+    for(int i = 0; i<MAX_ROW; i++)
+        for (int j=0; j<MAX_COL; j++)
+        {
+            cout<<dungeonArray[i][j];
+        }
+    cout<<endl;
+
+}
+
+// gets a valid move (L,R,U,D)
+char getMove(char dungeonArray[][])
+{
+    bool valid = true;
+    char playerMove;
+
+        //data validation (outlined)
+        do {
+            cin >>playerMove;
+            move = tolower(playerMove)
+            valid =true;
+            if (cin.fail() || playerMove != 'U'&& playerMove!='D' && playerMove != 'L' && playerMove!= 'R')
+            {
+                cin.clear();
+                cin.ignore(BIGNUM, '\n');
+                cout << "Computer says no please enter U, D, L, or R" << endl;
+                valid = false;
+            }
+            } while (not valid);
+
+
+/*
+a) pass in the current location as x and y coordinates
+b) get a move from the user and validate it (legal move and to a location inside the dungeon)
+c) return the move as a single character
+
+    bool valid = true;
+    char playerMove;
+
+    cout<< "To move Up enter 'U' for Down 'D' for Left 'L' for Right 'R'"<<endl;
+    cin >> playerMove;
+
+
+    }*/
+
+   return playerMove;
+}
+
+//check move is scan the board not remembering where the player is
+bool checkMove(char dungonArray[][], char playerMove)
+{
+/*
+a) pass in the dungeon, object code you are checking for (trap or treasure), the move
+b) check the move to see if onto a space containing the trap or treasure
+c) This function should be called to check for traps and treasure separately
+d) returns true if the move is onto the object passed in
+*/
+
+int row,col;
+
+for(int i = 0; i<MAX_ROW; i++)
+{
+    for (int j=0; j<MAX_COL; j++)
+        {
+           if (dungonArray[i][j] == PLAY)
+           {
+            row = i; //remember the players position and then compare to a move.
+            col = j;
+           }
+        }
+}
+        switch (playerMove) //actually checking where we need to move player
+    {
+            case 'U':
+                row--;
+                break;
+            case 'D':
+                row++;
+                break;
+            case 'L':
+                col--;
+                break;
+            case 'R':
+                col++;
+                break;
+            default:
+                cout << "something went wrong if you see this message" << endl;
+                break;
+        }
+
+//return true if it is not on trap or Gold.
+    if (dungonArray[row][col]!= SPACE);
+       {
+           return false;
+       }
+
+return true;
+}
+
+// shows board and moves the player coorrdiants to the new position.
+void updateDungeon(char dungonArray[][], int playerMove)
+{
+/*
+a) pass in the dungeon and the move
+b) update the dungeon moving the player marker (place a new player and clear the old spot)
+c) return type should be void
+*/
+
+int row,col;
+//setting the board
+for(int i = 0; i<MAX_ROW; i++)
+{
+    for (int j=0; j<MAX_COL; j++)
+        //erase players previous spot and set current concordance
+        {
+           if (dungonArray[i][j] == PLAY)
+           {
+            dungonArray[i][j]=SPACE;
+                row = i; //remember the players position and then compare to a move.
+                col = j;
+
+           }
+        }
+}
+        switch (playerMove) //actually checking where we need to move player
+    {
+            case 'U':
+                row--;
+                break;
+            case 'D':
+                row++;
+                break;
+            case 'L':
+                col--;
+                break;
+            case 'R':
+                col++;
+                break;
+            default:
+                cout << "something went wrong if you see this message" << endl;
+                break;
+        }
+    dungonArray[row][col]= PLAY;
+
+}
+
+// do you want to play again?
+bool repeat()
+{
+        bool valid = true;
+    char answer;
+do
+{
+    cout << "Would you like to play again, y/ n?" << endl;
+    cin >> answer;
+
+    switch(answer)
+{
+        case 'y':
+        answer = true;
+        valid = true;
+        break;
+        case 'n':
+        answer = false;
+        valid = true;
+        break;
+        default:
+        cout << "Incorrect, please enter y or n!" << endl;
+        valid = false;
+        break;
+}
+  }while ( !valid);
+
+return answer;
+}
+
+
+

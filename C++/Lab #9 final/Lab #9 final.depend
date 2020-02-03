@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1575574568 source:c:\users\sandi\desktop\classes\fall 2019\c++\lab #9 final\main.cpp
+	<iostream>
+	<fstream>
+	<limits>
+	<cctype>
+

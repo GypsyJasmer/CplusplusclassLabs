@@ -1,0 +1,99 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+// global constants to simplify coding
+const int SIZE = 9;
+const char SPACE = ' ';
+const char X = 'X';
+const char O = 'O';
+
+// initialize the board to all spaces
+void initArray(char board[]);
+
+// get and return a valid move
+int getMove(char board[]);
+
+// update the board by placing a marker in the next spot
+void updateBoard(char board[], int move, char player);
+
+// checks for a win (one row only)
+bool checkWin(char board[]);
+
+int main()
+{
+    char board[SIZE];
+    int move;
+    char player = X;
+    
+    initArray(board);
+    move = getMove(board);
+    updateBoard(board, move, player);
+    
+    if (checkWin(board))
+        cout << "won" << endl;
+    
+    return 0;
+}
+
+// initialize array to spaces
+void initArray(char board[])
+{
+    for(int i = 0; i < SIZE; i++)
+        board[i] = SPACE;
+}
+
+// get a valid move
+int getMove(char board[])
+{
+    int move;
+    bool valid = true;
+    cout << "Enter a move between 0 and 8, to an open space" << endl;
+    do {
+        cin >> move;
+        valid = true;
+        if ( cin.fail() or move < 0 or move > 8 or board[move] != SPACE)
+        {
+            valid = false;
+            cin.clear();
+            cin.ignore(200, '\n');
+            cout << "bad move" << endl;
+        }
+    } while (not valid);
+    return move;
+}
+
+// place player at move
+void updateBoard(char board[], int move, char player)
+{
+    board[move] = player;
+}
+
+// check for a win in the first row
+bool checkWin(char board[])
+{
+    if ( board[0] == board[1] and board[1] == board[2] and board[0] != SPACE )
+        return true;
+    return false;
+}
+void showInstructions();
+int initBoard(char board[]);
+void displayBoard(char board[]);
+int getMove(char board[], char player);
+void updateBoard(char board[], int move, char player);
+bool checkWin(char board[]);
+bool checkTie(char board[]);
+bool repeat();
+
+    char board[SIZE];
+    int move;
+    bool win, tie;
+    char player = X;
+	const int SIZE = 9;
+const char X = 'X';
+const char O = 'O';
+const char SPACE = ' ';
+const long BIGNUM = numeric_limits <streamsize>::max();
+
+

@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1579818977 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 2\lab #2\main.cpp
+	<iostream>
+	<cstdlib>
+	<limits>
+	<ctime>
+

@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1579124501 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 1\lab #1\main.cpp
+	<iostream>
+	<cmath>
+	<iomanip>
+	<string>
+	<limits>
+

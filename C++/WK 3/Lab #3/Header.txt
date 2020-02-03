@@ -1,0 +1,48 @@
+//
+//  recursion.cpp
+//  Recursion
+//
+//  Created by jim bailey on 1/23/19.
+//  This work by Jim Bailey is licensed under a Creative Commons Attribution 4.0 International License.
+//website help https://stackoverflow.com/questions/4367260/creating-a-recursive-method-for-palindrome
+//https://www.geeksforgeeks.org/recursive-function-check-string-palindrome/
+
+#include "recursion.h"
+#include <iostream>
+
+using namespace std;
+
+// this is your recursive palindrome program
+// it might have different arguments, depending on how you solved the problem
+bool isPalindrome(words[NUM_WORDS])
+{
+
+    if (position == inputString.length())//base case
+        {
+            return true;
+        }
+    if (inputString[position] == ch)
+
+if()
+{
+    return true;
+}
+
+//if the first and last characters do not match
+if (str[s] != str[e])
+{
+    return false;
+}
+
+if()
+{
+    return true;
+}
+
+
+}
+
+
+
+
+

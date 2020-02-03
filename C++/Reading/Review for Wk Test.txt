@@ -1,0 +1,207 @@
+#include <iostream>
+using namespace std;
+
+//This program illustrates the use of
+//pass by reference
+
+void myFun(int x, int y, int &sum, int &prod)
+{
+    sum = x + y;
+    prod = x * y;
+}
+
+
+int main()
+{
+    int a, b, sum, prod;
+    cout << "Enter two integers ";
+    cin >> a >> b;
+
+    myFun(a, b, sum, prod);
+
+    cout << a << " plus " << b << " is " << sum << endl;
+    cout << a << " times " << b << " is " << prod << endl;
+
+    return 0;
+}
+
+
+#include <iostream>
+using namespace std;
+
+//This program illustrates the use of
+//static variables
+
+    //Swap value from true to false
+bool myFun1()
+{
+    static bool value = true;
+    if ( value )
+        value = false;
+    else
+        value = true;
+    return value;
+}
+    //Modify a string
+string myFun2()
+{
+    static string value = "";
+    value += "a";
+    return value;
+}
+
+    //Keep and use a counter
+int myFun3(int x)
+{
+    static int value = 0;
+    value ++;
+    return x * value;
+}
+
+int main()
+{
+    const int LIMIT = 10;
+    for(int i = 0; i < LIMIT; i++)
+    {
+        cout << myFun1() << endl;
+    }
+
+    for(int i = 0; i < LIMIT; i++)
+    {
+        cout << myFun2() << endl;
+    }
+
+    for(int i = 0; i < LIMIT; i++)
+    {
+        cout << myFun3(i) << endl;
+    }
+
+    return 0;
+}
+
+#include <iostream>
+using namespace std;
+
+//This program illustrates the use of
+//default parameters
+
+int myFun(int x = 2, int y = 3, int z = 4)
+{
+    return x + y + z;
+}
+
+
+int main()
+{
+    int a = 10, b = 20, c = 30;
+
+    cout << "no defaults " << myFun(a, b, c) << endl;
+    cout << "default for z " << myFun(a, b) << endl;
+    cout << "default for y & z " << myFun(a) << endl;
+    cout << "all defaults " << myFun() << endl;
+
+    return 0;
+}
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+// Prototypes for a set of overloaded functions
+// that get user input and return it.
+int getInput(int min, int max);
+int getInput();
+double getInput(double min, double max);
+char getInput(char letter);
+
+int main()
+{
+    // Test drivers
+    cout << "Testing int version with min and max" << endl;
+    int testNum = getInput(0, 100);
+    cout << testNum << endl << endl;
+    cout << "Testing int version" << endl;
+    cout << getInput() << endl << endl;
+    cout << "Testing float version:" << endl;
+    cout << getInput(0.0, 100.0) << endl << endl;
+    cout << "Testing char version:" << endl;
+    cout << getInput('0') << endl;
+    return 0;
+}
+
+
+int getInput()
+{
+    int numIn = 0;
+    cout << "Enter an integer: ";
+    cin >> numIn;
+    return numIn;
+}
+
+int getInput(int min, int max)
+{
+    int numIn = getInput();
+    while (numIn < min || numIn > max)
+    {
+        cout << "Number out of range" << endl;
+        numIn = getInput();
+    }
+    return numIn;
+}
+
+double getInput(double min, double max)
+{
+    double numIn = 0;
+
+    do
+    {
+        cout << "Enter a number between " << min << " and " << max << " :";
+        cin >> numIn;
+    } while (numIn < min || numIn > max);
+
+    return numIn;
+}
+
+char getInput(char letter)
+{
+    cout << "Enter a letter: ";
+    cin >> letter;
+    return letter;
+}
+
+/*
+// stubs
+int getInput()
+{
+    return 0;
+}
+
+int getInput(int min, int max)
+{
+    return 0;
+}
+
+double getInput(double min, double max)
+{
+    return 0.0;
+}
+
+char getInput(char letter)
+{
+    return 'x';
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
