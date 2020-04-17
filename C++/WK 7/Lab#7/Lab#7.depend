@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1582840076 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 7\lab#7\main.cpp
+	<iostream>
+	"CreditCard.h"
+	"Person.h"
+
+1583272856 c:\users\sandi\desktop\classes\winter 2020\c++\wk 7\lab#7\creditcard.h
+	"Person.h"
+
+1584302541 c:\users\sandi\desktop\classes\winter 2020\c++\wk 7\lab#7\person.h
+	<string>
+
+1583272956 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 7\lab#7\creditcard.cpp
+	"CreditCard.h"
+

@@ -1,0 +1,34 @@
+Link Lists
+	Mutator
+		setter
+	Accessor
+		getter
+		
+class Person
+{
+    private:
+        int age;
+        string name;
+
+    public:
+        Person(){age =0; name = "" ;} //constructor
+        Person():age(0), name (""){} //two lines of code do the same thing sets the default if age and name are input.
+        Person(int a, string n){age=a;name=n;}
+
+        void setAge(int a){age = a;}
+        void setName (string n) {name=n;}
+
+        int getAge() {return age;}
+        string getName (){return name;}
+
+};
+
+Main
+    Person alpha;
+
+    alpha.setName("Sandi");
+    alpha.setAge(34);
+
+
+    cout<<alpha.getName()<<endl;
+    cout<<alpha.getAge()<<endl;

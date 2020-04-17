@@ -1,0 +1,208 @@
+Car Exercise
+	This exercise will work with arrays of pointers to objects and allocating new objects on the heap.
+
+Create a class Car. A Car has a string model, string, color, and integer year. It has the appropriate constructors, setters, and getters.
+
+In main, you will create an array of pointers to Cars.
+
+For four of the elements in that array, you will create a new Car on the heap and set its variables as listed below.
+
+Then you will use a loop to display the values for those four Cars.
+
+The four Cars you need to create are:
+Ford Black 1910
+VW Bug Pink 1968
+Pinto Red 1982
+Jeep Blue 2006
+
+You do not need to create separate header and code files for this exercise.
+
+#include <iostream>
+
+using namespace std;
+
+class Car{
+    string model;
+    string color;
+    static int counter;
+public:
+    Car(string model, string color);
+    Car();
+
+    void setModel(string model);
+    void setColor(string color);
+
+    string getModel();
+    string getColor();
+
+    static int getCounter() { return counter; }
+    const static int SIZE = 100;
+    static Car* cars[SIZE];
+};
+
+int main()
+{
+    Car * myCar = new Car;
+    Car * truck = new Car("Pickup", "Rusty");
+
+    for(int i = 0; i < Car::getCounter(); i++)
+        cout << Car::cars[i]->getColor() << " " << Car::cars[i]->getModel() << endl;
+
+    return 0;
+}
+
+// code for class
+int Car::counter = 0;
+Car* Car::cars[Car::SIZE];
+
+Car::Car(string model, string color)
+{
+    this->model = model;
+    this->color = color;
+
+    cars[counter] = this;
+    counter++;
+}
+Car::Car()
+{
+    model = "Ford";
+    color = "Black";
+
+    cars[counter] = this;
+    counter++;
+}
+
+void Car::setModel(string m)
+{
+    model = m;
+}
+void Car::setColor(string c)
+{
+    color = c;
+}
+
+string Car::getColor()
+{
+    return color;
+}
+string Car::getModel()
+{
+    return model;
+}
+
+
+CarList test driver
+//
+//  main.cpp
+//  List_of_Cars
+//
+//  Created by Jim Bailey on 2/17/18.
+//  Copyright © 2018 jim. All rights reserved.
+//
+
+#include <iostream>
+
+using namespace std;
+
+//#define TEST_CAR
+#define TEST_CARLIST
+
+#ifdef TEST_CAR
+#include "Car.h"
+#endif
+
+#ifdef TEST_CARLIST
+#include "Car.h"
+#include "CarList.h"
+#endif
+
+
+int main()
+{
+#ifdef TEST_CAR
+        // default constructor (Ford, Black, 1910)
+    cout << "Testing Car class" << endl;
+    Car car1;
+    
+        // overloaded constructors
+    Car car2("Pinto", "Purple", 1968);
+    Car truck1("Toyota", "Blue", 2010);
+    Car truck2("Jeep", "Green", 2008);
+
+        // test default constructor
+    cout << "Testing default constructor" << endl;
+    cout << "Should be a: Black 1910 Ford" <<endl << "Actually is: ";
+    cout << car1.getColor() << " " << car1.getYear() << " " << car1.getMake() << endl << endl;
+    
+        // test overloaded constructor
+    cout << "Testing overloaded constructor" << endl;
+    cout << "Should be a: Purple 1968 Pinto" << endl << "Actually is: ";
+    cout << car2.getColor() << " " << car2.getYear() << " " << car2.getMake() << endl << endl;
+    
+        // test setters
+    cout << "Testing setters" << endl;
+    cout << "Should be a Blue 2010 Toyota, is ";
+    cout << truck1.getColor() << " " << truck1.getYear() << " " << truck1.getMake() << endl;
+    truck1.setColor("Green");
+    truck1.setYear(2008);
+    truck1.setMake("Jeep");
+    cout << "Now should be a Green 2008 Jeep, is ";
+    cout << truck1.getColor() << " " << truck1.getYear() << " " << truck1.getMake() << endl << endl;
+    
+        // testing extraction operator
+    cout << "Testing extraction operator, next two lines should match" << endl;
+    cout << car2.getYear() << " " << car2.getColor() << " " << car2.getMake() << endl;
+    cout << car2 << endl << endl;
+    
+        // testing overloaded equality
+    cout << "Testing equality" << endl;
+    cout << car1 << ((car1 == truck1)?" is same as ":" is not same as ") << truck1 << endl;
+    cout << truck1 << ((truck1 == truck2)?" is same as ":" is not same as ") << truck2 << endl << endl;
+
+    cout << "Done with testing Car class" << endl << endl;
+#endif // TEST_CAR
+    
+#ifdef TEST_CARLIST
+    cout << "Testing CarList class" << endl;
+    
+    CarList theList;
+    
+        // testing adding items and displaying them
+    theList.addCar("Taxi", "Yellow", 1992);
+    theList.addCar("Ford", "White", 2017);
+    theList.addCar("Honda", "Blue", 2010);
+    theList.addCar("Chevy", "Green", 2012);
+    
+    cout << "Display list, should be: " << endl;
+    cout << " 2012 Green Chevy, 2010 Blue Honda, 2017 White Ford, 1992 Yellow Taxi, " << endl;
+    cout << "Actualy is: " << endl;
+    cout << " " << theList.displayList() << endl << endl;
+    
+        // testing find
+    cout << "Testing find " << endl;
+    Car car1("Chevy", "Blue", 2018);
+    Car car2("Ford", "White", 2017);
+    cout << car1 << ((theList.findCar("Chevy", "Blue", 2018))?" is ":" is not " ) << "in the list" << endl;
+    cout << car2 << ((theList.findCar("Ford", "White", 2017))?" is ":" is not " ) << "in the list" << endl << endl;
+    
+        // testing removehead
+    cout << "Testing remove head" << endl;
+    cout << "Should be: " << theList.displayList() << endl;
+    cout << "Actually is: ";
+        // this list will terminate when nullptr is returned
+    while ( Car * tempCar = theList.removeHead() )
+    {
+        cout << *tempCar << ", ";
+        delete tempCar;
+    }
+    
+        // testing find on empty list
+    cout << endl <<endl << "Testing find on empty List " << endl;
+    cout << car2 << ((theList.findCar("Ford", "White", 2017))?" is ":" is not " ) << "in the list" << endl << endl;
+    
+    
+    cout << "Done with testing CarList class" << endl << endl;
+#endif // TEST_CARLIST
+    
+    return 0;
+}

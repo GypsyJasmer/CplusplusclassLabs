@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1582059150 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 6\lab6\main.cpp
+	<iostream>
+	"Triangle.cpp"
+	"Triangle.h"
+
+1582062974 c:\users\sandi\desktop\classes\winter 2020\c++\wk 6\lab6\triangle.cpp
+	<iostream>
+	"Triangle.h"
+
+1583267605 c:\users\sandi\desktop\classes\winter 2020\c++\wk 6\lab6\triangle.h
+

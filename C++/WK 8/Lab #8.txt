@@ -1,0 +1,290 @@
+Car.h
+#ifndef CAR_H_INCLUDED
+#define CAR_H_INCLUDED
+
+#include <string>
+#include <ostream>
+
+
+class Car{
+    int year;
+    std::string color;
+    std::string make;
+
+public:
+    //overloaded constructor required
+
+    Car(std::string m="Ford", std::string c="Black", int vehYear=1910)
+    //Overloaded << operator that adds year, color, make to the provided output stream
+        {make=m; color=c; year=vehYear; }
+        //~Car(){} //destructor
+
+
+    //mutator
+    void setYear (int vehYear) {year=vehYear;}
+    void setColor(std::string c) {color=c;}
+    void setMake(std::string m) {make=m;}
+
+    //accessor
+    int getYear() const {return year;}
+    std::string getColor() const {return color;}
+    std::string getMake() const {return make;}
+
+    //other methods
+
+    // defining equality requires a friend if both right and left
+    friend bool operator==(const Car & lhs, const Car & rhs)
+    {
+        bool result = (  lhs.make == rhs.make && lhs.color == rhs.color &&lhs.year == rhs.year);
+
+        return result;
+    }
+
+        // defining insertion as a friend method
+    friend std::ostream & operator<<(std::ostream & os, const Car & rhs)
+    {
+    os << "Year =  " << rhs.year;
+    os << ", Color = " << rhs.color;
+    os << ", Year = " << rhs.make;
+    return os;
+    }
+
+
+};
+#endif // CAR_H_INCLUDED
+
+
+
+/* code for class
+int Car::counter = 0;
+Car* Car::cars[Car::SIZE];
+
+Car::Car(string make, string color)
+{
+    this->make = make;
+    this->color = color;
+
+    cars[counter] = this;
+    counter++;
+}
+Car::Car()
+{
+    make = "Ford";
+    color = "Black";
+
+    cars[counter] = this;
+    counter++;
+}*/
+
+__________________________________________________________________________________________________________________________________
+
+carlist.h
+
+//
+//  StructList.h
+//  List_of_Cars
+//
+//  Created by Jim Bailey on 2/17/18.
+//  Copyright © 2018 jim. All rights reserved.
+//
+
+#ifndef CARLIST_H_INCLUDED
+#define CARLIST_H_INCLUDED
+
+#ifndef CarList_h
+#define CarList_h
+
+#include <string>
+#include "car.h"
+
+
+struct Link {
+    Link * next;
+    Car* info;
+};
+
+
+class CarList {
+    private:
+        Link *head;
+
+        // recursive methods
+        void recDestruct(Link * ptr);
+        bool recFind(Link * ptr, Car& info);
+
+    public:
+        CarList();
+        ~CarList();//destructor when list goes away delete all the links of the list.
+
+        //input is color, color, year. Creates a new car, creates a new link that points to that car,adds the link to the head of the list
+        void addCar(std::string make, std::string color, int year);
+        bool findCar(std::string make, std::string color, int year);
+        Car* removeHead();
+        std::string displayList();
+
+
+
+};
+
+
+#endif /* CarList_h */
+
+
+#endif // CARLIST_H_INCLUDED
+__________________________________________________________________________________________________________________________________
+
+carlist.cpp
+
+#include <iostream>
+#include <sstream>
+#include "carlist.h"
+//#include "car.h"
+
+using namespace std;
+
+
+/**************************************
+// constructor, defines head
+**************************************/
+CarList::CarList()
+{
+    head = nullptr;
+}
+
+/**************************************
+// destructor, deletes items, using recursion
+**************************************/
+
+CarList::~CarList()
+{
+    recDestruct(head);
+}
+
+/**************************************
+// recursive method to walk down list, deleting items starting at tail
+**************************************/
+
+void CarList::recDestruct(Link * ptr)
+{
+    if ( ptr )
+    {
+        recDestruct(ptr->next);
+        //delete the car also
+        delete ptr->info;
+        delete ptr;
+    }
+}
+/**************************************
+// recursive method to search the list
+// uses overloaded equality operator in Car
+**************************************/
+bool CarList::recFind(Link * ptr, Car& info)
+{
+    if ( ptr == nullptr )
+        return false;
+
+    if (*(ptr->info) == info)
+        return true;
+
+    return recFind(ptr->next, info);
+}
+
+
+/**************************************
+// creates a new car on heap
+//creates new link
+//adds link to head of list
+input is make, color, year. Creates a new car,
+creates a new link that points to that car,adds
+the link to the head of the list
+**************************************/
+void CarList::addCar(std::string make, std::string color, int year)
+{
+    Link * tempLink = new Link;
+    tempLink->info = new Car;
+    //variable.method(pass through)
+    tempLink->info->setYear(year);
+    tempLink->info->setColor(color);
+    tempLink->info->setMake(make);
+    tempLink->next = head;
+    head = tempLink;
+}
+
+
+/**************************************
+// look for a car on the list
+// create an instance of it, use recursive method to see if there
+input is make, color, year. Creates a temporary car with those inputs. Uses the
+overloaded equality operator to check the list to see if such a car exists. Returns true if found, false
+otherwise
+**************************************/
+bool CarList::findCar(std::string make, std::string color, int year)
+{
+    Car finalCar(make, color, year);
+
+    //expecting finalCar as an arguement
+    return recFind(head,finalCar);
+}
+
+
+/**************************************
+// remove the item at head and return its value
+if list is empty, returns nullptr. Otherwise returns a pointer to the car at the head
+of the list and deletes that struct
+**************************************/
+Car* CarList::removeHead()
+{
+        // deal with empty list
+    if ( head == nullptr)
+        return nullptr;
+
+        // non-empty, so get first item and process
+    Link * tempLink = head;
+    Car * info = new Car;
+
+    //
+    info->setMake(head ->info-> getMake());
+    info->setColor(head -> info -> getColor());
+    info->setYear(head -> info -> getYear());
+
+        // update head
+    head = head->next;
+
+        // delete old link
+    delete tempLink;
+
+
+    return info;
+}
+
+
+ /**************************************
+ // build a sring  by walking down the list
+// uses overloaded extraction operator in Car
+return a string containing the Cars in the list. Use the overloaded << operator to
+create this list. There should be a comma and space after each car.
+**************************************/
+string CarList::displayList()
+{
+    stringstream buffer;
+
+        // start at the head
+    Link * ptr = head;
+
+        // until done with list
+    while ( ptr )
+    {
+        buffer << ptr->info->getYear() << " "<<ptr->info->getColor()<< " "<<ptr->info->getMake()<<", ";
+        ptr = ptr->next;
+    }
+
+        // now return the string
+    return buffer.str();
+}
+
+
+
+
+
+
+

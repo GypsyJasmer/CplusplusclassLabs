@@ -1,0 +1,193 @@
+//example of a static function varaible
+#include <iostream>
+
+using namespace std;
+
+    // simple class that uses memory on the heap
+class Example{
+    private:
+        static int myCount;
+    public:
+            // basic methods
+        Example() { myCount++; }
+        ~Example() { myCount--; }
+        static int getCount(){return myCount;}
+};
+    // this must be somewhere outside of header
+    // usually would be in .cpp file
+int Example::myCount = 0;
+
+
+int main()
+{
+    cout << "before creating any " << Example::getCount() << endl;
+    Example ex1;
+    cout << "after creating first " << Example::getCount() << endl;
+    {
+        cout << "before creating second " << Example::getCount() << endl;
+        Example ex2;
+        cout << "after creating second " << Example::getCount() << endl;
+    }
+    cout << "after scope of second " << Example::getCount() << endl;
+
+    return 0;
+}
+
+//Example of static array of instances
+
+#include <iostream>
+
+using namespace std;
+
+class Car{
+    string model;
+    string color;
+    static int counter;
+public:
+    Car(string model, string color);
+    Car();
+
+    void setModel(string model);
+    void setColor(string color);
+
+    string getModel();
+    string getColor();
+
+    static int getCounter() { return counter; }
+    const static int SIZE = 100;
+    static Car* cars[SIZE];
+};
+
+int main()
+{
+    Car * myCar = new Car;
+    Car * truck = new Car("Pickup", "Rusty");
+
+    for(int i = 0; i < Car::getCounter(); i++)
+        cout << Car::cars[i]->getColor() << " " << Car::cars[i]->getModel() << endl;
+
+    return 0;
+}
+
+// code for class
+int Car::counter = 0;
+Car* Car::cars[Car::SIZE];
+
+Car::Car(string model, string color)
+{
+    this->model = model;
+    this->color = color;
+
+    cars[counter] = this;
+    counter++;
+}
+Car::Car()
+{
+    model = "Ford";
+    color = "Black";
+
+    cars[counter] = this;
+    counter++;
+}
+
+void Car::setModel(string m)
+{
+    model = m;
+}
+void Car::setColor(string c)
+{
+    color = c;
+}
+
+string Car::getColor()
+{
+    return color;
+}
+string Car::getModel()
+{
+    return model;
+}
+
+
+//Rectangle Tester
+#include <iostream>
+#include "Rectangle.h"
+using namespace std;
+
+int main()
+{
+    // Create two rectangles
+	Rectangle r1;
+	Rectangle r2(3, 4);
+
+    // Show the default values for r1
+
+    cout << "Rectangle 1:" << endl;
+
+    if (r1.IsSquare())
+        cout << "It is square" << endl;
+    else
+        cout << "It is not square" << endl;
+
+    cout << "Length is " << r1.getLength() << endl
+    << "Width is " << r1.getWidth() << endl
+    << "Area is " << r1.getArea() << endl
+    << "Perimeter is " << r1.getPerimeter() << endl
+    << endl;
+
+    // Set new values for the length of the sides of r1
+	r1.setLength(19000);
+	r1.setWidth(10000);
+
+    // Show rectangle info for new lengths for r1
+ 	cout << "Rectangle 1 with new lengths:" << endl;
+
+    if (r1.IsSquare())
+        cout << "It is a square" << endl;
+    else
+        cout << "It is not square" << endl;
+
+    cout << "Length is " << r1.getLength() << endl
+    << "Width is " << r1.getWidth() << endl
+    << "Area is " << r1.getArea() << endl
+    << "Perimeter is " << r1.getPerimeter() << endl
+    << endl;
+
+    // Show rectangle info for lengths of r2 set by the constructor
+	cout << "Rectangle 2:" << endl;
+
+    if (r2.IsSquare())
+        cout << "It is a square" << endl;
+    else
+        cout << "It is not square" << endl;
+
+    cout << "Length is " << r2.getLength() << endl
+    << "Width is " << r2.getWidth() << endl
+    << "Area is " << r2.getArea() << endl
+    << "Perimeter is " << r2.getPerimeter() << endl
+    << endl;
+
+
+
+
+
+}
+
+
+This exercise will work with arrays of pointers to objects and allocating new objects on the heap.
+
+Create a class Car. A Car has a string model, string, color, and integer year. It has the appropriate constructors, setters, and getters.
+
+In main, you will create an array of pointers to Cars.
+
+For four of the elements in that array, you will create a new Car on the heap and set its variables as listed below.
+
+Then you will use a loop to display the values for those four Cars.
+
+The four Cars you need to create are:
+Ford Black 1910
+VW Bug Pink 1968
+Pinto Red 1982
+Jeep Blue 2006
+
+You do not need to create separate header and code files for this exercise.

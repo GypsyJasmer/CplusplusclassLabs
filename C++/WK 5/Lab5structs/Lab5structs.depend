@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1583443691 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 5\lab5structs\main.cpp
+	<iostream>
+	<iomanip>
+	<cstdlib>
+	<ctime>
+	<cstdio>
+	<limits>
+

@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1582225088 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 4\lab4pointer&array\main.cpp
+	<iostream>
+	<iomanip>
+	<cstdlib>
+	<ctime>
+	<limits>
+

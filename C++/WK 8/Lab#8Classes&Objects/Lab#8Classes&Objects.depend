@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1583354273 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 8\lab#8classes&objects\car.cpp
+	<iostream>
+	"car.h"
+
+1583441934 c:\users\sandi\desktop\classes\winter 2020\c++\wk 8\lab#8classes&objects\car.h
+	<string>
+	<ostream>
+
+1583441502 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 8\lab#8classes&objects\carlist.cpp
+	<iostream>
+	<sstream>
+	"carlist.h"
+
+1583439514 c:\users\sandi\desktop\classes\winter 2020\c++\wk 8\lab#8classes&objects\carlist.h
+	<string>
+	"car.h"
+
+1583441529 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 8\lab#8classes&objects\main.cpp
+	<iostream>
+	"car.h"
+	"carlist.h"
+	"Car.h"
+	"car.h"
+	"carlist.h"
+

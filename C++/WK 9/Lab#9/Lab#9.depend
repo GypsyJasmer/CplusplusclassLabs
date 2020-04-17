@@ -1,0 +1,42 @@
+# depslib dependency file v1.0
+1583723313 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 9\lab#9\blackjackhand.cpp
+	"BlackJackHand.h"
+
+1583723313 c:\users\sandi\desktop\classes\winter 2020\c++\wk 9\lab#9\blackjackhand.h
+	"PlayingCard.h"
+
+1583723313 c:\users\sandi\desktop\classes\winter 2020\c++\wk 9\lab#9\playingcard.h
+	<string>
+
+1583723313 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 9\lab#9\playingcard.cpp
+	"PlayingCard.h"
+
+1583723313 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 9\lab#9\playingcarddeck.cpp
+	"PlayingCardDeck.h"
+	<stdlib.h>
+	<iostream>
+
+1583723313 c:\users\sandi\desktop\classes\winter 2020\c++\wk 9\lab#9\playingcarddeck.h
+	"PlayingCard.h"
+
+1584047548 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 9\lab#9\player.cpp
+	"Player.h"
+
+1584047570 c:\users\sandi\desktop\classes\winter 2020\c++\wk 9\lab#9\player.h
+	"BlackJackHand.h"
+	<iostream>
+	<sstream>
+	<string>
+
+1583723254 source:c:\users\sandi\desktop\classes\winter 2020\c++\wk 9\lab#9\playertest.cpp
+	<iostream>
+	"Player.h"
+	"Dealer.h"
+
+1584045308 c:\users\sandi\desktop\classes\winter 2020\c++\wk 9\lab#9\dealer.h
+	"BlackJackHand.h"
+	"PlayingCardDeck.h"
+	<iostream>
+	<sstream>
+	<string>
+

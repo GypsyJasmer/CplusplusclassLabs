@@ -1,0 +1,83 @@
+    char*board=new char[NUM_SYMS]; //create new pointer array from memory allocation
+
+    srand(time(NULL)); //seed generator
+
+    for(int i = 0; i < NUM_SYMS; i++) //1st for loop gives character
+    {
+        for(int j=0;j<2;j++) //2nd for loop our  symbols 2x's
+        {
+            int temp, index =rand;
+            bool run=true; //run=true
+
+                while(run) //3rd for loop does the actual placement in SPACE of symbol and gives random location //while run==true
+                {
+                    if(SPACE)
+                    {
+                        board[index]=i;
+                        run=false;
+                    }
+                    else if(index>=NUM_SYMS)
+                    {
+                        index=0;
+                    }
+                    else if (index==temp)
+                    {
+                        run=false;
+                    }
+                    else
+                    {
+                        index++;
+                    }
+                }
+        }
+    }
+
+    return board;
+
+//if space
+    //board [index]=i
+    //then set run to false
+//else if index>=num_sys (end of array
+    //set index to zero
+//else if index==temp/rand #temp doesn't change index changes
+//run==false
+//else index++
+//back to top of for loop
+
+
+
+//find space function
+int findSPACE(board)
+{
+    int location;
+
+    do
+    {
+        location=rand()%16;
+
+    }while (board[location]! =SPACE)
+
+    return location;
+
+}
+
+//int findSPACE(board);
+
+
+
+Lab #4
+ou were to check for three values, please add a loop to main that does this
+
+getArraySize should use constants (DONE)
+
+srand should be in main, not createArray (NEED HELP)
+
+createArray should use constants (DONE)
+
+getInteger should use constants (NEED HELP) //why if not needed in code elsewhere?
+
+binarySeach has a bug that was in my code, should be < not <= (NEED HELP I didn't use Jim's binary search meaning I didn't have <=)
+
+====
+
+Looks good overall, please fix these issues and resubmit

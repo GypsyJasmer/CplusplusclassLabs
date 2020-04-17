@@ -1,0 +1,84 @@
+/*
+* Main.cpp
+* Memory Lab CS 162
+*
+* Jim Bailey
+*/
+
+
+#include <iostream>
+#include <iomanip>  // for output formatting
+#include <cstdlib>  // for random numbers
+#include <ctime>    // to initialize random
+#include <cstdio>
+#include <limits>
+
+using namespace std;
+    // define game constants
+const int NUM_SYMS = 8;
+const char SYMBOLS[NUM_SYMS] = {'!','@','#','$','%','^','&','*'};
+const char SPACE = ' ';
+const char UNKNOWN = 'X';
+const char YES = 'Y';
+const char NO = 'N';
+const int BIG_NUM = numeric_limits<streamsize>::max();
+const char EOL = '/n';
+
+    // define global structure type
+struct t_move{int row; int col;};
+
+    // function declarations, functions below
+char* createBoard();
+void displayInstructions();
+void displayBoard(char* board);
+void displayBoard(char* board, t_move move1);
+void displayBoard(char* board, t_move move1, t_move move2);
+t_move getMove();
+void updateBoard(char* board, t_move move1, t_move move2);
+int numSpaces(char* board);
+bool repeat();
+
+int main()
+{
+        // initialize random number generator
+    srand(static_cast<int>(time(NULL)));
+
+        // loop to play game again
+    do {
+            // get a new random board filled with symbols
+        char* board = createBoard();
+
+            // tell the user how to play the game
+        displayInstructions();
+
+            //counter for how many guesses
+        int moveCount = 0;
+
+            // game loop, ends when all symbols paired
+        do {
+                    // show the board before they move
+                displayBoard(board);
+                t_move move1 = getMove();
+                    // show the board with that move displayed
+                displayBoard(board, move1);
+                t_move move2 = getMove();
+                    // show the board with both moves displayed
+                displayBoard(board, move1, move2);
+                    // if symbols match, update board
+                updateBoard(board, move1, move2);
+
+                    // skip some spaces before next round
+                cout << endl << endl;
+                    // increment guess counter
+                moveCount++;
+
+        } while ( numSpaces(board) < 2 * NUM_SYMS );
+
+        cout << "It took you " << moveCount << " guesses." << endl;
+
+            // free up the memory from this itration
+        delete [] board;
+    } while ( repeat() );
+
+    return 0;
+}

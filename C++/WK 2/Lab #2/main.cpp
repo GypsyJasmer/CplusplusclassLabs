@@ -236,16 +236,16 @@ void getMove(char dungeonArray[MAX_ROW][MAX_COL],int playerRow, int playerCol, i
             {
                 switch (playerMove) //actually checking where we need to move player
                 {
-                    case 'U':
+                    case UP:
                         row--;
                         break;
-                    case 'D':
+                    case DOWN:
                         row++;
                         break;
-                    case 'L':
+                    case LEFT:
                         col--;
                         break;
-                    case 'R':
+                    case RIGHT:
                         col++;
                         break;
                     default:
